@@ -1,0 +1,22 @@
+// 主题字体颜色
+.theme-font-color {
+  color: $theme-color !important;
+}
+
+@mixin flex ($x: flex-start, $y: flex-start) {
+  display: flex;
+  justify-content: $x;
+  align-items: $y;
+}
+
+.flex {
+  @include flex();
+}
+
+.flex-center {
+  @include flex(center, center);
+}
+
+.flex-bt {
+  @include flex(space-between, center);
+}

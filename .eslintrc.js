@@ -7,13 +7,13 @@ module.exports = {
     ecmaVersion: 11,
     ecmaFeatures: {
       jsx: true,
-      "experimentalObjectRestSpread": true
+      'experimentalObjectRestSpread': true
     },
     sourceType: 'module'
   },
   globals: {
     page: true,
-    REACT_APP_ENV: true,
+    REACT_APP_ENV: true
   },
   env: {
     browser: true,
@@ -21,15 +21,22 @@ module.exports = {
     es6: true,
     mocha: true,
     jest: true,
-    jasmine: true,
+    jasmine: true
   },
   rules: {
     'react/prop-types': 0,
     'react/display-name': 0,
     'react/jsx-indent': ['error', 2],
-    'indent': ['error', 2],
 
     'semi': ['error', 'never'],
+    'jsx-quotes': [2, 'prefer-single'],
+    'quotes': [2, 'single', {
+      'avoidEscape': true,
+      'allowTemplateLiterals': true
+    }],
+    'indent': [2, 2, {
+      'SwitchCase': 1
+    }],
     'no-var': 2,
     'constructor-super': 2,
     'no-class-assign': 2,
@@ -107,7 +114,7 @@ module.exports = {
   },
   settings: {
     // support import modules from TypeScript files in JavaScript files
-    'import/resolver': { node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] } },
-    polyfills: ['fetch', 'Promise', 'URL', 'object-assign'],
-  },
+    'import/resolver': { node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] }},
+    polyfills: ['fetch', 'Promise', 'URL', 'object-assign']
+  }
 }

@@ -1,26 +1,26 @@
 import React from 'react'
-import logo from "./logo.svg"
-import './App.scss'
+import { Spin } from 'antd'
+import { connect } from 'react-redux'
+import { IStoreState } from '@/store'
+import AppRouter from './routes'
 
-function App() {
+const mapStateToProps = (state: IStoreState) => {
+  return { loading: state.system.loading }
+}
+
+type Props = ReturnType<typeof mapStateToProps>
+
+const App:React.FC<Props> = ({ loading }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='flex-center' style={{
+      width: '100%',
+      height: '100vh',
+    }}>
+      <Spin spinning={loading} tip='加载中...' size='large'>
+        <AppRouter />
+      </Spin>
     </div>
   )
 }
 
-export default App
+export default connect(mapStateToProps)(App)
