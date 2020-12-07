@@ -1,10 +1,12 @@
+import { ForwardRefExoticComponent } from 'react'
+
 interface IPermissionProps {
     id: string,
     name: string
 }
 interface IMetaProps {
     title?: string
-    icon?: string,
+    icon?: ForwardRefExoticComponent<any>,
     permissions?: IPermissionProps[]
 }
 
@@ -24,8 +26,8 @@ interface IRouteConfigProps {
     redirect?: IRedirectProps,
     [propName: string]: any
 }
-interface IChildrenRouteProps {
-children?: Array<IRouteProps>
+interface IChildRouteProps {
+    childRoutes?: Array<IRouteProps>
 }
 
-export default interface IRouteProps extends IRouteConfigProps, IChildrenRouteProps {}
+export default interface IRouteProps extends IRouteConfigProps, IChildRouteProps {}

@@ -1,57 +1,31 @@
 import React from 'react'
+import IRouteProps from '@/routes/types'
+import { Route } from 'react-router-dom'
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { connect, DispatchProp } from 'react-redux'
-import IRouteProps from '@/routes/types'
-import { IStoreState } from '@/store'
-import { Switch, Route, Redirect, withRouter, RouteComponentProps } from 'react-router-dom'
 import { setLoading, getMenus } from '@/store/actions'
 
 type ThunkDispatchProps = ThunkDispatch<{}, {}, AnyAction>
-type Props = IRouteProps & ReturnType<typeof mapStateToProps> & {
+type Props = IRouteProps & {
     dispatch: ThunkDispatchProps
-  } &DispatchProp & RouteComponentProps
+  } & DispatchProp
 
 const RouteItem:React.FC<Props> = ({
+  path,
   component: Component,
-  children,
-  location,
-  token,
-  dispatch,
-  ...rest
+  childRoutes,
+  dispatch
 }) => {
-  if (token) {
-    dispatch(getMenus())
-  } else {
-    // dispatch(setLoading(false))
-    return <Redirect to={{
-      pathname: '/',
-      search: `?redirectUrl=${location.pathname}`
-    }} />
-  }
+  setTimeout(() => {
+    dispatch(setLoading(false))
+  }, 2000)
   return (
-    <Route render={
-      props => {
-        return (
-          <Component {...props} {...rest}>
-            {
-              Array.isArray(children) ? children.map((route, index) => (
-                <RouteItemComponent {...route} key={index} />
-              )) : null
-            }
-          </Component>
-        )
-      }
-    }></Route>
+    <Route path={path} render={
+      props =>
+        (<Component {...props} childRoutes={childRoutes}/>)
+    } />
   )
 }
 
-const mapStateToProps = (state: IStoreState) => {
-  return {
-    token: state.user.token
-  }
-}
-
-export const RouteItemComponent = connect(mapStateToProps)(withRouter(RouteItem))
-
-export default RouteItemComponent
+export default connect()(RouteItem)

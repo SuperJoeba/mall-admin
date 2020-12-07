@@ -1,5 +1,19 @@
+import loadable from '@loadable/component'
 import IRouteProps from './types'
-import Login from '@/views/login'
+import {
+  HomeOutlined,
+  ClockCircleOutlined,
+  FileDoneOutlined,
+  ScheduleOutlined,
+  BarChartOutlined,
+  FormOutlined,
+  UserOutlined
+} from '@ant-design/icons'
+
+
+const Login = loadable(() => import('@/views/login'))
+const Layout = loadable(() => import('@/layout'))
+const Dashboard = loadable(() => import('@/views/dashboard'))
 
 const baseRoutes:IRouteProps[] = [
   {
@@ -13,7 +27,21 @@ const baseRoutes:IRouteProps[] = [
 ]
 
 const asyncRoutes:IRouteProps[] = [
-
+  {
+    path: '/layout',
+    component: Layout,
+    childRoutes: [
+      {
+        path: '/layout/dashboard',
+        component: Dashboard,
+        exact: true,
+        meta: {
+          title: '数据面板',
+          icon: HomeOutlined
+        }
+      }
+    ]
+  }
 ]
 
 const routesConfig:IRouteProps[] = [...baseRoutes, ...asyncRoutes]

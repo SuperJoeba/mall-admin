@@ -12,14 +12,19 @@ type Props = ReturnType<typeof mapStateToProps>
 
 const App:React.FC<Props> = ({ loading }) => {
   return (
-    <div className='flex-center' style={{
-      width: '100%',
-      height: '100vh',
-    }}>
-      <Spin spinning={loading} tip='加载中...' size='large'>
+    <Spin
+      spinning={loading}
+      tip='加载中...'
+      size='large'
+      style={{
+        width: '100%',
+        height: '100vh',
+        maxHeight: '100vh'
+      }}>
+      <div style={{ display: loading ? 'none' : 'block' }}>
         <AppRouter />
-      </Spin>
-    </div>
+      </div>
+    </Spin>
   )
 }
 
