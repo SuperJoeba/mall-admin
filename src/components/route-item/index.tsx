@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom'
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { connect, DispatchProp } from 'react-redux'
-import { setLoading, getMenus } from '@/store/actions'
 
 type ThunkDispatchProps = ThunkDispatch<{}, {}, AnyAction>
 type Props = IRouteProps & {
@@ -17,9 +16,6 @@ const RouteItem:React.FC<Props> = ({
   childRoutes,
   dispatch
 }) => {
-  setTimeout(() => {
-    dispatch(setLoading(false))
-  }, 2000)
   return (
     <Route path={path} render={
       props =>

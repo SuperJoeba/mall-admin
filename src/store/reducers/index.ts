@@ -1,11 +1,11 @@
 import user from './user'
-import menu from './menu'
+import route from './route'
 import system from './system'
 import { combineReducers } from 'redux'
 
 const rootReducer = combineReducers({
   user,
-  menu,
+  route,
   system
 })
 

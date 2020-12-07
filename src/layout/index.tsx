@@ -6,7 +6,6 @@ import IRouteProps from '@/routes/types'
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { IStoreState } from '@/store'
-import { setLoading, getMenus } from '@/store/actions'
 
 type ThunkDispatchProps = ThunkDispatch<{}, {}, AnyAction>
 type Props = IRouteProps & ReturnType<typeof mapStateToProps> & RouteComponentProps & {
@@ -20,14 +19,9 @@ const Layout:React.FC<Props> = ({childRoutes, token, location, dispatch}) => {
       <h1>Layout</h1>
       <Switch>
         {
-          token ? childRoutes?.map((route, i) => {
+          childRoutes?.map((route, i) => {
             return (<RouteItem key={i} {...route} />)
-          }) : (
-            <Redirect to={{
-              pathname: '/',
-              search: `?redirect=${location.pathname}`
-            }} />
-          )
+          })
         }
       </Switch>
     </div>

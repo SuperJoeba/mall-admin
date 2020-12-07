@@ -16,7 +16,7 @@ export interface IUserState {
 }
 
 const initialState: IUserState = {
-  token: undefined,
+  token: 'adc',
   userInfo: {
     userId: undefined,
     userName: '',

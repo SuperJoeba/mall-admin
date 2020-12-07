@@ -2,13 +2,13 @@ import thunk from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers'
 import { IUserState } from './reducers/user'
-import { IMenuState } from './reducers/menu'
+import { IRouteState } from './reducers/route'
 import { ISystemState } from './reducers/system'
 
 
 export interface IStoreState {
   user: IUserState,
-  menu: IMenuState,
+  route: IRouteState,
   system: ISystemState
 }
 

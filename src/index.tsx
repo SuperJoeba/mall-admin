@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 import '@/assets/styles/index.scss'
 import 'antd/dist/antd.css'
 import App from '@/App'
@@ -18,7 +19,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ConfigProvider locale={zhCN}>
-        <App />
+        <Router>
+          <App />
+        </Router>
       </ConfigProvider>
     </Provider>
   </React.StrictMode>,

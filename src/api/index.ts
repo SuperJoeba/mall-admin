@@ -5,7 +5,7 @@ export function Login(data:Object):Promise<any> {
   })
 }
 
-export function GetMenus():Promise<any> {
+export function GetRoutes():Promise<any> {
   return new Promise((resolve, reject) => {
     resolve(1)
   })

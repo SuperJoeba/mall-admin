@@ -15,7 +15,7 @@ const Login = loadable(() => import('@/views/login'))
 const Layout = loadable(() => import('@/layout'))
 const Dashboard = loadable(() => import('@/views/dashboard'))
 
-const baseRoutes:IRouteProps[] = [
+export const baseRoutes:IRouteProps[] = [
   {
     path: ['/', '/login'],
     exact: true,
@@ -26,7 +26,7 @@ const baseRoutes:IRouteProps[] = [
   }
 ]
 
-const asyncRoutes:IRouteProps[] = [
+export const asyncRoutes:IRouteProps[] = [
   {
     path: '/layout',
     component: Layout,
@@ -43,7 +43,3 @@ const asyncRoutes:IRouteProps[] = [
     ]
   }
 ]
-
-const routesConfig:IRouteProps[] = [...baseRoutes, ...asyncRoutes]
-
-export default routesConfig
