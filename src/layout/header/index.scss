@@ -1,0 +1,16 @@
+.layout-header {
+  background-color: #fff;
+  height: 50px;
+  padding: 0 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+
+  .trigger {
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    :hover {
+      color: #1890ff;
+    }
+  }
+}

@@ -7,7 +7,8 @@ import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { IStoreState } from '@/store'
 import { Layout } from 'antd'
-import Side from './side'
+import Sider from './sider'
+import Header from './header'
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -17,7 +18,7 @@ import {
 } from '@ant-design/icons'
 import './index.scss'
 
-const { Header, Sider, Content } = Layout
+const { Content } = Layout
 
 type ThunkDispatchProps = ThunkDispatch<{}, {}, AnyAction>
 type Props = IRouteProps & ReturnType<typeof mapStateToProps> & RouteComponentProps & {
@@ -37,19 +38,14 @@ const LayoutView:React.FC<Props> = ({childRoutes, dispatch}) => {
   }
   return (
     <Layout>
-      <Side {...{collapsed}}/>
+      <Sider {...{collapsed}}/>
       <Layout className='site-layout'>
-        <Header className='site-layout-background' style={{ padding: 0 }}>
-          {
-            collapsed ? (<MenuUnfoldOutlined className='trigger' onClick={handleToggleCollapsed}/>) : (<MenuFoldOutlined className='trigger' onClick={handleToggleCollapsed} />)
-          }
-        </Header>
+        <Header {...{collapsed, setCollapsed: handleToggleCollapsed}}/>
         <Content
           className='site-layout-background'
           style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
+            margin: 15,
+            padding: 20,
           }}
         >
           <Switch>

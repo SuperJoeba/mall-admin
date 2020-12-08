@@ -15,7 +15,7 @@ const { Sider } = Layout
 
 type Props = LayoutState & RouteComponentProps
 
-const Side:React.FC<Props> = ({ collapsed }) => {
+const SiderView:React.FC<Props> = ({ collapsed }) => {
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className='logo'>Mall-Admin</div>
@@ -34,4 +34,4 @@ const Side:React.FC<Props> = ({ collapsed }) => {
   )
 }
 
-export default withRouter(Side)
+export default withRouter(SiderView)
