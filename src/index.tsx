@@ -6,6 +6,7 @@ import '@/assets/styles/index.scss'
 import 'antd/dist/antd.css'
 import App from '@/App'
 import store from '@/store'
+import CONFIG from '@/config'
 import reportWebVitals from './reportWebVitals'
 import { ConfigProvider } from 'antd'
 import moment from 'moment'
@@ -19,7 +20,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ConfigProvider locale={zhCN}>
-        <Router>
+        <Router basename={CONFIG.baseURL}>
           <App />
         </Router>
       </ConfigProvider>

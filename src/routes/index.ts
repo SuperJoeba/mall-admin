@@ -12,8 +12,9 @@ import {
 
 
 const Login = loadable(() => import('@/views/login'))
-const Layout = loadable(() => import('@/layout'))
+const LayoutView = loadable(() => import('@/layout'))
 const Dashboard = loadable(() => import('@/views/dashboard'))
+const System = loadable(() => import('@/views/system'))
 
 export const baseRoutes:IRouteProps[] = [
   {
@@ -29,15 +30,24 @@ export const baseRoutes:IRouteProps[] = [
 export const asyncRoutes:IRouteProps[] = [
   {
     path: '/layout',
-    component: Layout,
+    component: LayoutView,
     childRoutes: [
       {
-        path: '/layout/dashboard',
+        path: ['/layout', '/layout/dashboard'],
         component: Dashboard,
         exact: true,
         meta: {
           title: '数据面板',
           icon: HomeOutlined
+        }
+      },
+      {
+        path: '/layout/system',
+        component: System,
+        exact: true,
+        meta: {
+          title: '系统管理',
+          icon: ClockCircleOutlined
         }
       }
     ]

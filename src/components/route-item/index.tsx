@@ -1,6 +1,6 @@
 import React from 'react'
 import IRouteProps from '@/routes/types'
-import { Route } from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom'
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { connect, DispatchProp } from 'react-redux'
@@ -14,12 +14,16 @@ const RouteItem:React.FC<Props> = ({
   path,
   component: Component,
   childRoutes,
-  dispatch
+  ...rest
 }) => {
+  const { meta } = rest
+  if (meta) {
+    document.title = meta.title
+  }
+
   return (
-    <Route path={path} render={
-      props =>
-        (<Component {...props} childRoutes={childRoutes}/>)
+    <Route path={path} render={ props =>
+      (<Component {...props} childRoutes={childRoutes}/>)
     } />
   )
 }

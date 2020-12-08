@@ -5,7 +5,7 @@ interface IPermissionProps {
     name: string
 }
 interface IMetaProps {
-    title?: string
+    title: string
     icon?: ForwardRefExoticComponent<any>,
     permissions?: IPermissionProps[]
 }

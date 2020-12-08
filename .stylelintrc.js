@@ -11,7 +11,9 @@ module.exports = {
       "s",
       "%",
       "px",
-      "deg"
+      "deg",
+      "vw",
+      "vh"
     ]
   }
 }

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { connect, DispatchProp } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
-import { Switch, Redirect, useLocation, useHistory } from 'react-router-dom'
-import CONFIG from '@/config'
+import { Switch, useLocation, useHistory } from 'react-router-dom'
 import RouteItem from '@/components/route-item'
 import { IStoreState } from '@/store'
 import { AnyAction } from 'redux'
 import IRouteProps from '@/routes/types'
 import { setRoutes } from '@/store/actions'
+import { baseRoutes } from '@/routes'
 
 type ThunkDispatchProps = ThunkDispatch<{}, {}, AnyAction>
 type Props = IRouteProps & {
@@ -20,16 +20,24 @@ const App: React.FC<Props> = ({ routes, token, dispatch }) => {
 
   useEffect(() => {
     const pathname = location.pathname
-    console.log(pathname)
-    const baseRoute = routes.filter(item => item.path === pathname || item.path.includes(pathname))
-    if (!baseRoute.length) {
+    const baseRoute = baseRoutes.filter(item => item.path === pathname || item.path.includes(pathname))
+    if (baseRoute.length) {
       if (token) {
-        dispatch(setRoutes())
+        if (routes.length <= baseRoutes.length) {
+          dispatch(setRoutes())
+        }
+        history.replace('/layout/dashboard')
+      }
+    } else {
+      if (token) {
+        if (routes.length <= baseRoutes.length) {
+          dispatch(setRoutes())
+        }
       } else {
-        history.replace('/')
+        history.replace('/', location)
       }
     }
-  }, [location])
+  }, [location.pathname])
 
   return (
     <Switch>
