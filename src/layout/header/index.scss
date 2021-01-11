@@ -2,7 +2,6 @@
   background-color: #fff;
   height: 50px;
   padding: 0 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
 
   .trigger {
     font-size: 18px;
@@ -11,6 +10,21 @@
 
     :hover {
       color: #1890ff;
+    }
+  }
+
+  .system-options {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    li {
+      height: 100%;
+      padding: 0 10px;
+
+      &:hover {
+        background-color: #eee;
+      }
     }
   }
 }

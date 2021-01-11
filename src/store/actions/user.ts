@@ -8,11 +8,11 @@ export const setUser = (state:any = {}) => {
   return {
     type: LOGIN,
     userInfo: state.userInfo,
-    token: state.token
+    token: state.accessToken
   }
 }
 
-export const login = (data:Object) => async(dispatch:Dispatch) => {
+export const login = (data:any) => async(dispatch:Dispatch) => {
   try {
     const result = await Login(data)
     return dispatch(setUser(result))

@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import '@/assets/styles/index.scss'
 import 'antd/dist/antd.css'
 import App from '@/App'
-import store from '@/store'
+import store, {persistor} from '@/store'
 import CONFIG from '@/config'
 import reportWebVitals from './reportWebVitals'
 import { ConfigProvider } from 'antd'
@@ -17,15 +18,15 @@ import 'moment/locale/zh-cn' // 解决 antd 日期组件国际化问题
 moment.locale('zh-cn')
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
       <ConfigProvider locale={zhCN}>
         <Router basename={CONFIG.baseURL}>
           <App />
         </Router>
       </ConfigProvider>
-    </Provider>
-  </React.StrictMode>,
+    </PersistGate>
+  </Provider>,
   document.getElementById('root')
 )
 

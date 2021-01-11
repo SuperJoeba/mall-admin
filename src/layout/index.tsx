@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
-import { Switch, Link, RouteComponentProps } from 'react-router-dom'
+import { Switch, Link, Route, RouteComponentProps } from 'react-router-dom'
 import { connect, DispatchProp } from 'react-redux'
-import RouteItem from '@/components/route-item'
+import PrivateRoute from '@/components/private-route'
 import IRouteProps from '@/routes/types'
-import { AnyAction } from 'redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { IStoreState } from '@/store'
 import { Layout } from 'antd'
 import Sider from './sider'
 import Header from './header'
+import Tabbar from './tabbar'
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -20,38 +18,48 @@ import './index.scss'
 
 const { Content } = Layout
 
-type ThunkDispatchProps = ThunkDispatch<{}, {}, AnyAction>
-type Props = IRouteProps & ReturnType<typeof mapStateToProps> & RouteComponentProps & {
-    dispatch: ThunkDispatchProps
-  } & DispatchProp
-
 export interface LayoutState {
     collapsed?: boolean
-    setCollapsed?: () => void
+    setCollapsed?: () => void,
+    tabPanes?: Array<IRouteProps>,
+    setTabPanes?: (pane:IRouteProps[]) => void,
+    activeKey?:string,
+    setActiveKey?: (key: string) => void
   }
 
-const LayoutView:React.FC<Props> = ({childRoutes, dispatch}) => {
+const LayoutView:React.FC<IRouteProps> = ({ routes }) => {
   const [collapsed, setCollapsed] = useState(false)
+  const [tabPanes, setTabPanes] = useState<Array<IRouteProps>>([])
+  const [activeKey, setActiveKey] = useState<string>('')
 
   const handleToggleCollapsed = () => {
     setCollapsed(!collapsed)
   }
+  const handleSetTabPanes = (panes:IRouteProps[]) => {
+    setTabPanes(panes)
+  }
+  const handleSetActiveKey = (key:string) => {
+    setActiveKey(key)
+  }
+  console.log(routes)
   return (
     <Layout>
-      <Sider {...{collapsed}}/>
+      <Sider {...{collapsed, tabPanes, setTabPanes: handleSetTabPanes, setActiveKey: handleSetActiveKey,}}/>
       <Layout className='site-layout'>
         <Header {...{collapsed, setCollapsed: handleToggleCollapsed}}/>
+        {
+          tabPanes.length ? <Tabbar {...{activeKey, setActiveKey: handleSetActiveKey, tabPanes, setTabPanes: handleSetTabPanes}} /> : null
+        }
         <Content
           className='site-layout-background'
-          style={{
-            margin: 15,
-            padding: 20,
-          }}
+          style={{padding: 15, margin: 15}}
         >
           <Switch>
             {
-              childRoutes?.map((route, i) => {
-                return (<RouteItem key={i} {...route} />)
+              routes.map((route:IRouteProps, i:number) => {
+                return (
+                  <PrivateRoute {...route} key={i}/>
+                )
               })
             }
           </Switch>
@@ -61,10 +69,4 @@ const LayoutView:React.FC<Props> = ({childRoutes, dispatch}) => {
   )
 }
 
-const mapStateToProps = (state: IStoreState) => {
-  return {
-    token: state.user.token
-  }
-}
-
-export default connect(mapStateToProps)(LayoutView)
+export default LayoutView

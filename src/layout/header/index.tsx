@@ -1,18 +1,30 @@
-import React from 'react'
-import { Layout, Avatar, Popover } from 'antd'
+import React, { useState } from 'react'
+import { Layout } from 'antd'
 import { LayoutState } from '../index'
 import { UserOutlined } from '@ant-design/icons'
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
+  FullscreenExitOutlined,
+  FullscreenOutlined
 } from '@ant-design/icons'
 import './index.scss'
+import Avatar from '../avatar'
+import { fullScreen, existFullScreen } from '@/utils'
 
 const { Header } = Layout
 
 type Props = LayoutState
 
 const HeaderView:React.FC<Props> = ({ collapsed, setCollapsed }) => {
+  const [isFullScreen, setFullScreen] = useState(false)
+
+  const handleFullScreen = () => {
+    setFullScreen(isFullScreen => {
+      isFullScreen ? existFullScreen() : fullScreen()
+      return !isFullScreen
+    })
+  }
   return (
     <Header className='layout-header flex-bt'>
       <div>
@@ -22,9 +34,14 @@ const HeaderView:React.FC<Props> = ({ collapsed, setCollapsed }) => {
             (<MenuFoldOutlined className='trigger' onClick={setCollapsed} />)
         }
       </div>
-      <div>
-
-      </div>
+      <ul className='system-options flex-center'>
+        <li className='flex-center' style={{fontSize: 18}} onClick={handleFullScreen}>
+          {
+            !isFullScreen ? <FullscreenOutlined /> : <FullscreenExitOutlined />
+          }
+        </li>
+        <Avatar />
+      </ul>
     </Header>
   )
 }

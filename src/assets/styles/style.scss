@@ -46,3 +46,21 @@ pre {
 em {
   font-style: normal;
 }
+
+.ant-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+  box-shadow: inset 0 0 0 1000px #fff !important;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+::-webkit-inner-spin-button {
+  // webkit内核input[number]默认箭头样式
+  -webkit-appearance: none !important;
+  margin: 0;
+  -moz-appearance: textfield;
+}
+
+[type="number"] {
+  // molilla内核input[number]默认箭头样式
+  -moz-appearance: textfield;
+}

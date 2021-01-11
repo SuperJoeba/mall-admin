@@ -1,0 +1,13 @@
+.icon-box {
+  height: 300px;
+  overflow: auto;
+
+  .icon-card {
+    width: 25%;
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

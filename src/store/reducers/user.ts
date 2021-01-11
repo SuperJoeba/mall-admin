@@ -2,12 +2,10 @@ import { USER } from '../constants'
 
 const { LOGIN } = USER
 export interface IUserInfoProps {
-    userId: string | undefined,
-    userName: string,
-    phone: string,
-    avatarUrl: string | undefined,
-    role: string,
-    createAt: string
+  username: string,
+  phone: string,
+  avatar: string | undefined,
+  roleId: string,
 }
 
 export interface IUserState {
@@ -16,14 +14,12 @@ export interface IUserState {
 }
 
 const initialState: IUserState = {
-  token: 'adc',
+  token: undefined,
   userInfo: {
-    userId: undefined,
-    userName: '',
+    username: '',
     phone: '',
-    avatarUrl: undefined,
-    role: '',
-    createAt: ''
+    avatar: undefined,
+    roleId: '',
   }
 }
 

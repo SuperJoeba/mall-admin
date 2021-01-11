@@ -1,0 +1,20 @@
+.popover-content {
+  width: 200px;
+
+  .popover-option {
+    display: block;
+    color: inherit;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+      color: inherit;
+      background-color: #eee;
+    }
+  }
+
+  .sign-out {
+    background-color: #f5f5f5;
+    text-align: center;
+  }
+}

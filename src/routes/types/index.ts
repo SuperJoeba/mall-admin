@@ -4,30 +4,19 @@ interface IPermissionProps {
     id: string,
     name: string
 }
-interface IMetaProps {
-    title: string
-    icon?: ForwardRefExoticComponent<any>,
-    permissions?: IPermissionProps[]
-}
-
-interface IRedirectProps {
-    to: string | object;
-    from: string;
-    push?: boolean;
-    exact?: boolean;
-    strict?: boolean;
-  }
 
 interface IRouteConfigProps {
-    path: string[] | string,
+    name?: string,
+    path?: string,
     component?: any,
     exact?: boolean,
-    meta?: IMetaProps,
-    redirect?: IRedirectProps,
+    icon?: string,
+    permissions?: IPermissionProps[]
+    keepAlive?: boolean,
     [propName: string]: any
 }
 interface IChildRouteProps {
-    childRoutes?: Array<IRouteProps>
+    children?: Array<IRouteProps>
 }
 
 export default interface IRouteProps extends IRouteConfigProps, IChildRouteProps {}

@@ -3,7 +3,8 @@ export const USER = {
 }
 
 export const ROUTE = {
-  SETROUTE: Symbol('')
+  SETROUTE: Symbol(''),
+  SETASYNCROUTE: Symbol('')
 }
 
 export const SYSTEM = {
